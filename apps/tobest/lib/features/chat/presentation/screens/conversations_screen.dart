@@ -44,7 +44,7 @@ class ConversationsScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final convsAsync = ref.watch(conversationsProvider);
-    final isRtl      = Directionality.of(context) == TextDirection.rtl;
+    final isRtl      = Directionality.of(context).index == 0;
     final theme      = Theme.of(context);
 
     return Scaffold(
