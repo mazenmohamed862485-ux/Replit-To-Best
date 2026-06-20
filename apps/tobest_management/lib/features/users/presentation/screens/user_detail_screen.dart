@@ -8,7 +8,7 @@ import 'package:shared/domain/entities/user_entity.dart';
 import 'package:shared/infrastructure/gas_client.dart';
 import 'package:tobest_management/features/auth/presentation/providers/mgmt_auth_provider.dart';
 import 'package:tobest_management/features/users/presentation/screens/users_screen.dart'
-    show _parseUser;
+    show parseUser;
 
 part 'user_detail_screen.g.dart';
 
@@ -16,7 +16,7 @@ part 'user_detail_screen.g.dart';
 Future<UserEntity> userDetail(Ref ref, String userId) async {
   final gas  = await ref.read(gasClientProvider.future);
   final resp = await gas.get<Map<String, dynamic>>('/admin/users/$userId');
-  return _parseUser(resp.data?['user'] as Map<String, dynamic>? ?? {});
+  return parseUser(resp.data?['user'] as Map<String, dynamic>? ?? {});
 }
 
 /// شاشة تفاصيل المستخدم
@@ -192,11 +192,11 @@ class UserDetailScreen extends ConsumerWidget {
         content: Text(user.name),
         actions: [
           TextButton(
-            onPressed: () => ctx.pop(false),
+            onPressed: () => Navigator.of(ctx).pop(false),
             child:     Text(isRtl ? 'إلغاء' : 'Cancel'),
           ),
           FilledButton(
-            onPressed: () => ctx.pop(true),
+            onPressed: () => Navigator.of(ctx).pop(true),
             style:     FilledButton.styleFrom(
               backgroundColor:
                   user.isBanned ? AppColors.success : AppColors.error,
@@ -250,11 +250,11 @@ class UserDetailScreen extends ConsumerWidget {
         ),
         actions: [
           TextButton(
-            onPressed: () => ctx.pop(false),
+            onPressed: () => Navigator.of(ctx).pop(false),
             child:     Text(isRtl ? 'إلغاء' : 'Cancel'),
           ),
           FilledButton(
-            onPressed: () => ctx.pop(true),
+            onPressed: () => Navigator.of(ctx).pop(true),
             child:     Text(isRtl ? 'حفظ' : 'Save'),
           ),
         ],
