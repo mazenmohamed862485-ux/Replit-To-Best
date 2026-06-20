@@ -78,7 +78,7 @@ class _SubscriptionsScreenState extends ConsumerState<SubscriptionsScreen>
 
   @override
   Widget build(BuildContext context) {
-    final isRtl = Directionality.of(context) == TextDirection.rtl;
+    final isRtl = Directionality.of(context).index == 0;
 
     return Scaffold(
       appBar: AppBar(
@@ -316,7 +316,7 @@ class _RequestCard extends StatelessWidget {
               ),
             ),
             TextButton(
-              onPressed: () => ctx.pop(),
+              onPressed: () => Navigator.of(ctx).pop(),
               child:     Text(isRtl ? 'إغلاق' : 'Close'),
             ),
           ],
@@ -348,11 +348,11 @@ class _RequestCard extends StatelessWidget {
         ),
         actions: [
           TextButton(
-            onPressed: () => ctx.pop(false),
+            onPressed: () => Navigator.of(ctx).pop(false),
             child:     Text(isRtl ? 'إلغاء' : 'Cancel'),
           ),
           FilledButton(
-            onPressed: () => ctx.pop(true),
+            onPressed: () => Navigator.of(ctx).pop(true),
             child:     Text(isRtl ? 'موافقة' : 'Approve'),
           ),
         ],
@@ -381,14 +381,14 @@ class _RequestCard extends StatelessWidget {
         ),
         actions: [
           TextButton(
-            onPressed: () => ctx.pop(false),
+            onPressed: () => Navigator.of(ctx).pop(false),
             child:     Text(isRtl ? 'إلغاء' : 'Cancel'),
           ),
           FilledButton(
             style:     FilledButton.styleFrom(
               backgroundColor: AppColors.error,
             ),
-            onPressed: () => ctx.pop(true),
+            onPressed: () => Navigator.of(ctx).pop(true),
             child:     Text(isRtl ? 'رفض' : 'Reject'),
           ),
         ],
