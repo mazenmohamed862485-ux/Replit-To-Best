@@ -31,7 +31,7 @@ jobs:
           cache: true
 
       - name: Install Melos
-        run: dart pub global activate melos
+        run: dart pub global activate melos 2.9.0
 
       - name: Create Secrets File
         run: |
