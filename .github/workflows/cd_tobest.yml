@@ -8,6 +8,7 @@ on:
 
 env:
   APP_DIR: apps/tobest
+  FLUTTER_VERSION: '3.24.5'
 
 jobs:
   build-android:
@@ -25,7 +26,9 @@ jobs:
 
       - uses: subosito/flutter-action@v2
         with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
           channel: stable
+          cache: true
 
       - name: Install Melos
         run: dart pub global activate melos 2.9.0
@@ -46,6 +49,13 @@ jobs:
 
       - name: Generate Code
         run: melos run generate
+
+      - name: Create local.properties
+        run: |
+          FLUTTER_SDK=$(dirname $(which flutter))/..
+          echo "flutter.sdk=$FLUTTER_SDK" > ${{ env.APP_DIR }}/android/local.properties
+          echo "flutter.versionCode=${{ github.run_number }}" >> ${{ env.APP_DIR }}/android/local.properties
+          echo "flutter.versionName=1.0.0" >> ${{ env.APP_DIR }}/android/local.properties
 
       - name: Build Debug APK
         working-directory: ${{ env.APP_DIR }}
