@@ -3,7 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:shared/design/tokens.dart';
 import 'package:shared/domain/entities/nutrition_entity.dart';
 import 'package:shared/infrastructure/gas_client.dart';
@@ -15,7 +14,6 @@ import 'package:tobest/features/nutrition/presentation/widgets/macro_ring.dart';
 import 'package:tobest/features/nutrition/presentation/widgets/meal_card.dart';
 import 'package:tobest/features/nutrition/presentation/widgets/food_search_delegate.dart';
 
-part 'nutrition_screen.g.dart';
 
 /// شاشة التغذية
 ///
