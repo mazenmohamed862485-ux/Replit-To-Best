@@ -49,14 +49,14 @@ jobs:
 
       - name: Create local.properties
         run: |
-          FLUTTER_SDK=$(dirname $(which flutter))/..
-          echo "flutter.sdk=$FLUTTER_SDK" > ${{ env.APP_DIR }}/android/local.properties
+          echo "flutter.sdk=$FLUTTER_ROOT" > ${{ env.APP_DIR }}/android/local.properties
           echo "flutter.versionCode=${{ github.run_number }}" >> ${{ env.APP_DIR }}/android/local.properties
           echo "flutter.versionName=1.0.0" >> ${{ env.APP_DIR }}/android/local.properties
+          cat ${{ env.APP_DIR }}/android/local.properties
 
-      - name: Build Debug APK
+      - name: Build Debug APK (verbose)
         working-directory: ${{ env.APP_DIR }}
-        run: flutter build apk --debug --build-name=1.0.0 --build-number=${{ github.run_number }}
+        run: flutter build apk --debug --build-name=1.0.0 --build-number=${{ github.run_number }} -v
 
       - name: Rename APK
         run: |
