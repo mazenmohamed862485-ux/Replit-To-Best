@@ -10,9 +10,6 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
-env:
-  FLUTTER_VERSION: '3.24.5'
-
 jobs:
   analyze:
     name: Dart Analyze
@@ -23,14 +20,12 @@ jobs:
 
       - uses: subosito/flutter-action@v2
         with:
-          flutter-version: ${{ env.FLUTTER_VERSION }}
           channel: stable
           cache: true
 
       - name: Install Melos
         run: dart pub global activate melos
 
-      # C-10: إنشاء secrets.dart قبل Bootstrap
       - name: Create secrets.dart stub
         run: |
           mkdir -p packages/shared/lib/config
@@ -65,7 +60,6 @@ jobs:
 
       - uses: subosito/flutter-action@v2
         with:
-          flutter-version: ${{ env.FLUTTER_VERSION }}
           channel: stable
           cache: true
 
