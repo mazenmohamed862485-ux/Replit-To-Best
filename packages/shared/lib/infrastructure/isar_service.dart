@@ -120,9 +120,8 @@ class IsarService {
               aliasesJson:       Value(jsonEncode(f['aliases'] ?? [])),
               searchHintsJson:   Value(jsonEncode(f['searchHints'] ?? [])),
             ),
-          ,
-          mode: InsertMode.insertOrReplace,
-        );
+            mode: InsertMode.insertOrReplace,
+          );
         }
       });
     }
@@ -180,9 +179,8 @@ class IsarService {
             isEdited:       Value(m['isEdited'] as bool? ?? false),
             reactionsJson:  Value(jsonEncode(m['reactions'] ?? [])),
           ),
-        ,
-        mode: InsertMode.insertOrReplace,
-      );
+          mode: InsertMode.insertOrReplace,
+        );
       }
     });
   }
