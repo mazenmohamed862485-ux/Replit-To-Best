@@ -14,7 +14,7 @@ import 'package:shared/infrastructure/isar_service.dart';
 import 'package:shared/utils/evaluator.dart';
 import 'package:tobest/features/auth/presentation/providers/auth_provider.dart';
 import 'package:uuid/uuid.dart';
-import 'package:drift/drift.dart' show Value, OrderingTerm;
+import 'package:drift/drift.dart';
 import 'package:shared/infrastructure/drift/app_database.dart';
 
 part 'workout_provider.g.dart';
@@ -42,7 +42,9 @@ Future<List<ExerciseEntity>> todayExercises(Ref ref) async {
     // Cache locally
     await isar.db.batch((b) {
       for (final ex in exercises) {
-        b.insertOnConflictUpdate(isar.db.exercisesTable, _exerciseToCompanion(ex));
+        b.insert(isar.db.exercisesTable, _exerciseToCompanion(ex),
+        mode: InsertMode.insertOrReplace,
+      );
       }
     });
     return exercises;

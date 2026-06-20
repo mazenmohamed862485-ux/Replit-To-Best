@@ -8,6 +8,7 @@ import 'package:pedometer/pedometer.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:shared/domain/entities/health_entity.dart';
 import 'package:shared/infrastructure/gas_client.dart';
+import 'package:drift/drift.dart';
 import 'package:shared/infrastructure/isar_service.dart';
 import 'package:tobest/features/auth/presentation/providers/auth_provider.dart';
 import 'package:uuid/uuid.dart';

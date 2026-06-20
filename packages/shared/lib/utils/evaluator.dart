@@ -190,7 +190,7 @@ class Evaluator {
     // الوزن نفسه، التكرارات أكثر
     if (wD == 0 && rD > 0) {
       final weeks = prev.date != null
-          ? weeksBetween(prev.date!, curr.date)
+          ? weeksBetween(prev.date!, curr.date ?? DateTime.now())
           : 99.0;
 
       if (rD >= 2) {

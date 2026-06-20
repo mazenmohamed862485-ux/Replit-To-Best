@@ -93,7 +93,7 @@ class VideoServiceDrive implements VideoService {
     if (!dir.existsSync()) return 0;
     return dir.listSync().whereType<File>()
         .where((f) => f.path.endsWith('.mp4'))
-        .fold(0, (s, f) => s + f.lengthSync());
+        .fold<int>(0, (s, f) => s + f.lengthSync());
   }
 
   Future<void> _evictLRU() async {

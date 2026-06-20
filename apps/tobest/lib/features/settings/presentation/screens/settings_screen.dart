@@ -53,8 +53,9 @@ class SettingsScreen extends ConsumerWidget {
           _LanguageSelector(
             currentLocale: locale,
             isRtl:         isRtl,
-            onChanged: (l) =>
-                ref.read(userLocaleProvider.notifier).state = l,
+            onChanged: (l) {
+                if (l != null) ref.read(userLocaleProvider.notifier).state = l;
+              },
           ),
 
           const Divider(),

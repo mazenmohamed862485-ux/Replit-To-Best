@@ -12,7 +12,7 @@ import 'package:shared/infrastructure/gas_client.dart';
 import 'package:shared/infrastructure/isar_service.dart';
 import 'package:tobest/features/auth/presentation/providers/auth_provider.dart';
 import 'package:uuid/uuid.dart';
-import 'package:drift/drift.dart' show Value;
+import 'package:drift/drift.dart';
 
 part 'nutrition_provider.g.dart';
 

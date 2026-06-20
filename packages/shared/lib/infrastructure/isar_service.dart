@@ -100,7 +100,7 @@ class IsarService {
       final chunk = foods.skip(i).take(batchSize).toList();
       await db.batch((b) {
         for (final f in chunk) {
-          b.insertOnConflictUpdate(
+          b.insert(
             db.foodItemsTable,
             FoodItemsTableCompanion(
               id:                Value(f['id'] as String? ?? f['name'] as String),
@@ -120,7 +120,9 @@ class IsarService {
               aliasesJson:       Value(jsonEncode(f['aliases'] ?? [])),
               searchHintsJson:   Value(jsonEncode(f['searchHints'] ?? [])),
             ),
-          );
+          ,
+          mode: InsertMode.insertOrReplace,
+        );
         }
       });
     }
@@ -161,7 +163,7 @@ class IsarService {
   Future<void> saveMessages(List<Map<String, dynamic>> messages) async {
     await db.batch((b) {
       for (final m in messages) {
-        b.insertOnConflictUpdate(
+        b.insert(
           db.chatMessagesTable,
           ChatMessagesTableCompanion(
             id:             Value(m['id'] as String),
@@ -178,7 +180,9 @@ class IsarService {
             isEdited:       Value(m['isEdited'] as bool? ?? false),
             reactionsJson:  Value(jsonEncode(m['reactions'] ?? [])),
           ),
-        );
+        ,
+        mode: InsertMode.insertOrReplace,
+      );
       }
     });
   }
