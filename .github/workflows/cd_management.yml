@@ -47,18 +47,21 @@ jobs:
       - name: Generate Code
         run: melos run generate
 
-      - name: Build Debug APK
-        working-directory: ${{ env.APP_DIR }}
+      - name: Create local.properties
         run: |
-          flutter build apk \
-            --debug \
-            --build-name="1.0.0" \
-            --build-number="${GITHUB_RUN_NUMBER:-1}"
+          FLUTTER_SDK=$(dirname $(which flutter))/..
+          echo "flutter.sdk=$FLUTTER_SDK" > ${{ env.APP_DIR }}/android/local.properties
+          echo "flutter.versionCode=${{ github.run_number }}" >> ${{ env.APP_DIR }}/android/local.properties
+          echo "flutter.versionName=1.0.0" >> ${{ env.APP_DIR }}/android/local.properties
+
+      - name: Build Debug APK
+        working-directory: ${{ env.APP_DIR }}/android
+        run: ./gradlew assembleDebug --no-daemon -Pbuild-name=1.0.0 -Pbuild-number=${{ github.run_number }}
 
       - name: Rename APK
         run: |
-          BUILD="${GITHUB_RUN_NUMBER:-1}"
-          cp ${{ env.APP_DIR }}/build/app/outputs/flutter-apk/app-debug.apk \
+          BUILD="${{ github.run_number }}"
+          cp ${{ env.APP_DIR }}/build/app/outputs/apk/debug/app-debug.apk \
              management-debug-build${BUILD}.apk
 
       - name: Upload Artifact
