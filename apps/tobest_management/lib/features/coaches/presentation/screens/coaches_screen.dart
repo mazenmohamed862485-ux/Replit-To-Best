@@ -164,13 +164,13 @@ class CoachesScreen extends ConsumerWidget {
         content: Text(coach.name),
         actions: [
           TextButton(
-            onPressed: () => ctx.pop(false),
+            onPressed: () => Navigator.of(ctx).pop(false),
             child:     Text(isRtl ? 'إلغاء' : 'Cancel'),
           ),
           FilledButton(
             style:     FilledButton.styleFrom(
                 backgroundColor: AppColors.error),
-            onPressed: () => ctx.pop(true),
+            onPressed: () => Navigator.of(ctx).pop(true),
             child:     Text(isRtl ? 'إزالة' : 'Remove'),
           ),
         ],
