@@ -84,7 +84,7 @@ class BodyChart extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
-    final isRtl = Directionality.of(context) == TextDirection.rtl;
+    final isRtl = Directionality.of(context).index == 0;
 
     return Card(
       child: Padding(
@@ -147,7 +147,7 @@ class PRList extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final prsAsync = ref.watch(topPRsProvider);
     final theme     = Theme.of(context);
-    final isRtl     = Directionality.of(context) == TextDirection.rtl;
+    final isRtl     = Directionality.of(context).index == 0;
 
     return prsAsync.when(
       loading: () => const Center(child: CircularProgressIndicator()),
